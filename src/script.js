@@ -1,8 +1,25 @@
 // select dom element with querySelector
-const state = document.querySelector('#state');
-const incriment = document.querySelector('#incriment');
-const decriment = document.querySelector('#decriment');
+const counterEl = document.querySelector('#counter');
+const incrimentEl = document.querySelector('#incriment');
+const decrimentEl = document.querySelector('#decriment');
 
-incriment.addEventListener('click', () =>{
-    console.log('incriment clicked');
+// initial state
+let counter = 0;
+
+// event listeners
+incrimentEl.addEventListener('click', () =>{
+    counter++;
+    counterEl.innerText = counter
 })
+decrimentEl.addEventListener('click', () =>{
+    counter--;
+    if(counter === 0 && counter<0){
+
+       return counterEl.innerText = 0
+    }
+    counterEl.innerText = counter
+
+})
+
+
+
