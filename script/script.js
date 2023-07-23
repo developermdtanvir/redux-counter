@@ -2,10 +2,12 @@
 const incrimentEl = document.querySelector("#incriment");
 const decrimentEl = document.querySelector("#decriment");
 const counterEl = document.querySelector("#counter");
+const itestEl = document.querySelector("#item");
 
 // action identifer
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
+const ITEST = "ITEST";
 
 // action creation function
 const increment = (value) => {
@@ -14,6 +16,7 @@ const increment = (value) => {
     value: value || 5,
   };
 };
+
 const decrement = (value) => {
   return {
     type: DECREMENT,
@@ -21,16 +24,26 @@ const decrement = (value) => {
   };
 };
 
+const itest = (value) => {
+  return {
+    type: ITEST,
+    value: value,
+  };
+};
+
 // initial state
 const initialState = {
   value: 0,
+  properties: {
+    a: 5,
+    b: 6,
+  },
 };
 
 console.log(initialState);
 // create reducer function
 
 const counterReducer = (state = initialState, action) => {
-  console.log(action);
   if (action.type === INCREMENT) {
     return {
       ...state,
@@ -43,6 +56,14 @@ const counterReducer = (state = initialState, action) => {
     return {
       ...state,
       value: state.value - action.value,
+    };
+  } else if (action.type === ITEST) {
+    return {
+      ...state,
+      properties: {
+        ...state.properties,
+        b: state.properties.b + action.value,
+      },
     };
   } else {
     return state;
@@ -69,4 +90,9 @@ incrimentEl.addEventListener("click", () => {
 });
 decrimentEl.addEventListener("click", () => {
   store.dispatch(decrement(5));
+});
+// this is created example purposes
+
+itestEl.addEventListener("click", () => {
+  store.dispatch(itest(5));
 });
